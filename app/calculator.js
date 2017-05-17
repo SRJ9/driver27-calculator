@@ -1,6 +1,6 @@
 var app = angular.module('CalculatorApp', ['ngRoute']);
 var range = _.range(1, 3);
-app.config(['$routeProvider','$locationProvider',
+app.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/calculator', {
@@ -18,53 +18,42 @@ app.config(['$routeProvider','$locationProvider',
         });
     }]);
 
+app.factory('APIFactory', function ($http) {
+    var APIFactory = {};
 
-app.controller("CalculatorCtrl", function ($scope, $filter) {
+    APIFactory.getStanding = function () {
+        return $http.get('/standing-demo.json');
+
+    };
+
+    return APIFactory;
+
+});
+
+app.controller("CalculatorCtrl", function ($scope, $filter, APIFactory) {
     $scope.max_pos_str = null;
 
-    $scope.standing = [
-        {
-            'id': 1, 'name': 'H', 'last_name': 'Burnett', 'team': 'British', 'points': 76, 'total': 76,
-            'pos_str': '003000000000000000000000000001', 'total_str': '003000000000000000000000000001'
-        },
-        {
-            'id': 2, 'name': 'E', 'last_name': 'Jans', 'team': 'SK', 'points': 58, 'total': 58,
-            'pos_str': '000003000000000000000001000000', 'total_str': '000003000000000000000001000000'
-        },
-        {
-            'id': 3, 'name': 'P', 'last_name': 'Hogaboom', 'team': 'FireCruiser', 'points': 55, 'total': 55,
-            'pos_str': '000001001001001000000000000000', 'total_str': '000001001001001000000000000000'
-        },
-        {
-            'id': 4, 'name': 'R', 'last_name': 'Hale', 'team': 'British', 'points': 41, 'total': 41,
-            'pos_str': '001000001000000000000000000000', 'total_str': '001000001000000000000000000000'
-        },
-        {
-            'id': 5, 'name': 'C', 'last_name': 'Kubn', 'team': 'FireCruiser', 'points': 37, 'total': 37,
-            'pos_str': '000000001001001000000000000000', 'total_str': '000000001001001000000000000000'
-        },
-        {
-            'id': 6, 'name': 'C', 'last_name': 'Druphagel', 'team': 'SK', 'points': 35, 'total': 35,
-            'pos_str': '000000001001000001000000000000', 'total_str': '000000001001000001000000000000'
-        }
-
-    ];
+    APIFactory.getStanding().then(function (response) {
+        $scope.standing = response.data;
+    }, function (err) {
+        console.error(err);
+    });
 
     $scope.range = range;
 
-    $scope.final_standing = function () {
-        return $filter('orderBy')($scope.standing, ['-total']);
+    $scope.finalStanding = function () {
+        return $filter('orderBy')($scope.standing, ['-total', '-total_str']);
     };
 
-    $scope.race_cls = function(val){
-        return 'race_'+val;
+    $scope.raceCls = function (val) {
+        return 'race_' + val;
     };
 
-    $scope.contender_cls = function(val){
-        return 'contender_'+val;
+    $scope.contenderCls = function (val) {
+        return 'contender_' + val;
     };
 
-    $scope.point_system = function () {
+    $scope.pointSystem = function () {
         return {
             '1': 25,
             '2': 18,
@@ -79,13 +68,13 @@ app.controller("CalculatorCtrl", function ($scope, $filter) {
         }
     };
 
-    $scope.calculate_all_points = function () {
+    $scope.calculateAllPoints = function () {
         angular.forEach($scope.standing, function (contender) {
-            $scope.calculate_points(contender);
+            $scope.calculatePoints(contender);
         })
     };
 
-    $scope.calculate_points = function (contender) {
+    $scope.calculatePoints = function (contender) {
 
         var points = contender.points;
         var error_count = false;
@@ -101,7 +90,7 @@ app.controller("CalculatorCtrl", function ($scope, $filter) {
             if (result_pos >= 1 && result_pos <= total_split_length) {
                 total_split[result_pos - 1] = parseInt(total_split[result_pos - 1]) + 1;
             }
-            var race_point = $scope.point_system()[result.value];
+            var race_point = $scope.pointSystem()[result.value];
             if (race_point) {
                 points += race_point;
             }
@@ -118,10 +107,10 @@ app.controller("CalculatorCtrl", function ($scope, $filter) {
         contender.total = (!error_count) ? points : 0;
     };
 
-    $scope.max_points = function () {
+    $scope.maxPoints = function () {
         var max_points = 0;
         var max_pos_str = null;
-        angular.forEach($scope.contenders, function (contender) {
+        angular.forEach($scope.standing, function (contender) {
             if (contender.total === max_points && contender.total_str > max_pos_str) {
                 max_pos_str = contender.total_str;
             }
@@ -136,11 +125,11 @@ app.controller("CalculatorCtrl", function ($scope, $filter) {
         return max_points;
     };
 
-    $scope.is_max = function (contender) {
-        return contender.total === $scope.max_points() && contender.total_str === $scope.max_pos_str;
+    $scope.isMax = function (contender) {
+        return contender.total === $scope.maxPoints() && contender.total_str === $scope.max_pos_str;
     };
 
-    $scope.repeat_pos = function (race_cls, pos) {
+    $scope.repeatPos = function (race_cls, pos) {
         var count = 0;
         angular.forEach(angular.element('.race_' + race_cls), function (el, key) {
             if (parseInt(el.value) === pos) {

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "H",
+    "last_name": "Burnett",
+    "team": "British",
+    "points": 76,
+    "total": 76,
+    "pos_str": "003000000000000000000000000001",
+    "total_str": "003000000000000000000000000001"
+  },
+  {
+    "id": 2,
+    "name": "E",
+    "last_name": "Jans",
+    "team": "SK",
+    "points": 58,
+    "total": 58,
+    "pos_str": "000003000000000000000001000000",
+    "total_str": "000003000000000000000001000000"
+  },
+  {
+    "id": 3,
+    "name": "P",
+    "last_name": "Hogaboom",
+    "team": "FireCruiser",
+    "points": 55,
+    "total": 55,
+    "pos_str": "000001001001001000000000000000",
+    "total_str": "000001001001001000000000000000"
+  },
+  {
+    "id": 4,
+    "name": "R",
+    "last_name": "Hale",
+    "team": "British",
+    "points": 41,
+    "total": 41,
+    "pos_str": "001000001000000000000000000000",
+    "total_str": "001000001000000000000000000000"
+  },
+  {
+    "id": 5,
+    "name": "C",
+    "last_name": "Kubn",
+    "team": "FireCruiser",
+    "points": 37,
+    "total": 37,
+    "pos_str": "000000001001001000000000000000",
+    "total_str": "000000001001001000000000000000"
+  },
+  {
+    "id": 6,
+    "name": "C",
+    "last_name": "Druphagel",
+    "team": "SK",
+    "points": 35,
+    "total": 35,
+    "pos_str": "000000001001000001000000000000",
+    "total_str": "000000001001000001000000000000"
+  }
+]

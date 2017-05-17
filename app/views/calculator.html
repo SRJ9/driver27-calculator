@@ -9,7 +9,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="contender in standing">
-                <td ng-class="{'bg-success': is_max(contender)}">
+                <td ng-class="{'bg-success': isMax(contender)}">
                     <h4>{{contender.total}} <small>({{contender.points}}) {{contender.total - contender.points}}</small></h4>
                 </td>
                 <td>
@@ -19,10 +19,10 @@
                 <td ng-repeat="val in range">
                     <input type="number"
                            size="3" min="1" max="100"
-                           ng-click="calculate_all_points()"
+                           ng-click="calculateAllPoints()"
                            ng-model="contender.pos[val]"
-                           ng-class="[contender_cls(contender.id), race_cls(val),
-                           {'bg-danger': repeat_pos(val, contender.pos[val])}]"/>
+                           ng-class="[contenderCls(contender.id), raceCls(val),
+                           {'bg-danger': repeatPos(val, contender.pos[val])}]"/>
                 </td>
 
 
