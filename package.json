@@ -1,0 +1,21 @@
+{
+  "name": "driver27-calculator",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AngularJS app to calculate final results of racing competition based on django-driver27",
+  "repository": "https://github.com/angular/angular-seed",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.7"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "update-deps": "npm update",
+    "postupdate-deps": "bower update",
+    "prestart": "npm install",
+    "start": "node ./app/app.js"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}

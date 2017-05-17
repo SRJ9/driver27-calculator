@@ -1,0 +1,25 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Position</th>
+        <th>Driver</th>
+        <th>Team</th>
+        <th>Points</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="contender in final_standing() track by $index">
+        <td>{{$index + 1}}</td>
+        <td>
+            <h4>
+                <small>{{contender.name}}</small>
+                {{contender.last_name}}
+            </h4>
+        </td>
+        <td>{{contender.team}}</td>
+        <td>{{contender.total}}</td>
+    </tr>
+    </tbody>
+
+
+</table>

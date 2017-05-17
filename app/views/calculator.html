@@ -1,0 +1,31 @@
+    <table class="table" ng-if="standing">
+        <thead>
+
+        <tr>
+            <th class="col-md-1">Points</th>
+            <th class="col-md-3">Driver</th>
+            <th ng-repeat="val in range">{{val}}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="contender in standing">
+                <td ng-class="{'bg-success': is_max(contender)}">
+                    <h4>{{contender.total}} <small>({{contender.points}}) {{contender.total - contender.points}}</small></h4>
+                </td>
+                <td>
+                    <h4>{{contender.last_name}} <small>{{contender.name}}</small></h4>
+                    <cite>{{contender.team}}</cite>
+                </td>
+                <td ng-repeat="val in range">
+                    <input type="number"
+                           size="3" min="1" max="100"
+                           ng-click="calculate_all_points()"
+                           ng-model="contender.pos[val]"
+                           ng-class="[contender_cls(contender.id), race_cls(val),
+                           {'bg-danger': repeat_pos(val, contender.pos[val])}]"/>
+                </td>
+
+
+            </tr>
+        </tbody>
+    </table>

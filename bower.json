@@ -1,0 +1,15 @@
+{
+  "name": "driver27-calculator",
+  "description": "AngularJS app to calculate final results of racing competition based on django-driver27",
+  "version": "0.1.0",
+  "homepage": "https://github.com/SRJ9/driver27-calculator",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "angular-route": "^1.6.4"
+  }
+}
