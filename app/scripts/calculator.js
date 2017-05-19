@@ -1,16 +1,16 @@
-var app = angular.module('CalculatorApp', ['ngRoute']);
+var app = angular.module('CalculatorApp', ['ngRoute', 'apiFactory']);
 var range = _.range(1, 3);
 app.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/calculator', {
-                templateUrl: 'views/calculator.html'
+                templateUrl: '../views/calculator.html'
             })
             .when('/table', {
-                templateUrl: 'views/table.html'
+                templateUrl: '../views/table.html'
             })
             .otherwise({
-                templateUrl: 'views/calculator.html'
+                templateUrl: '../views/calculator.html'
             });
         $locationProvider.html5Mode({
             enabled: true,
@@ -18,22 +18,11 @@ app.config(['$routeProvider', '$locationProvider',
         });
     }]);
 
-app.factory('APIFactory', function ($http) {
-    var APIFactory = {};
 
-    APIFactory.getStanding = function () {
-        return $http.get('/standing-demo.json');
-
-    };
-
-    return APIFactory;
-
-});
-
-app.controller("CalculatorCtrl", function ($scope, $filter, APIFactory) {
+app.controller("CalculatorCtrl", function ($scope, $filter, API) {
     $scope.max_pos_str = null;
 
-    APIFactory.getStanding().then(function (response) {
+    API.getStanding().then(function (response) {
         $scope.standing = response.data;
     }, function (err) {
         console.error(err);
@@ -53,20 +42,7 @@ app.controller("CalculatorCtrl", function ($scope, $filter, APIFactory) {
         return 'contender_' + val;
     };
 
-    $scope.pointSystem = function () {
-        return {
-            '1': 25,
-            '2': 18,
-            '3': 15,
-            '4': 12,
-            '5': 10,
-            '6': 8,
-            '7': 6,
-            '8': 4,
-            '9': 2,
-            '10': 1
-        }
-    };
+    $scope.pointSystem = API.getPunctuationList();
 
     $scope.calculateAllPoints = function () {
         angular.forEach($scope.standing, function (contender) {
@@ -90,7 +66,7 @@ app.controller("CalculatorCtrl", function ($scope, $filter, APIFactory) {
             if (result_pos >= 1 && result_pos <= total_split_length) {
                 total_split[result_pos - 1] = parseInt(total_split[result_pos - 1]) + 1;
             }
-            var race_point = $scope.pointSystem()[result.value];
+            var race_point = $scope.pointSystem[result.value];
             if (race_point) {
                 points += race_point;
             }
