@@ -8,21 +8,22 @@
         </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="contender in standing">
+            <tr ng-repeat="contender in standing track by $index" ng-init="outerIndex=$index">
                 <td ng-class="{'bg-success': isMax(contender)}">
                     <h4>{{contender.total}} <small>({{contender.points}}) {{contender.total - contender.points}}</small></h4>
                 </td>
                 <td>
-                    <h4>{{contender.last_name}} <small>{{contender.name}}</small></h4>
-                    <cite>{{contender.team}}</cite>
+                    <h4>{{contender.driver.last_name}} <small>{{contender.driver.first_name}}</small></h4>
+                    <cite>{{contender.teams}}</cite>
                 </td>
-                <td ng-repeat="val in range">
+                <td ng-repeat="pending_race in pending_races_summary">
                     <input type="number"
                            size="3" min="1" max="100"
+                           data-alter-punctuation="{{pending_race.alter_punctuation}}"
                            ng-click="calculateAllPoints()"
-                           ng-model="contender.pos[val]"
-                           ng-class="[contenderCls(contender.id), raceCls(val),
-                           {'bg-danger': repeatPos(val, contender.pos[val])}]"/>
+                           ng-model="contender.pos[pending_race.id]"
+                           ng-class="[contenderCls(contender.id), raceCls(pending_race.id),
+                           {'bg-danger': repeatPos(pending_race.id, contender.pos[pending_race.id])}]"/>
                 </td>
 
 

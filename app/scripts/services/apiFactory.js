@@ -2,24 +2,19 @@ angular.module("apiFactory", [])
     .factory('API', function ($http) {
         var API = {};
 
+        if(typeof DR27_DOMAIN === 'undefined') DR27_DOMAIN = '';
+        if(typeof TITLE_CONTENDERS_PATH === 'undefined') TITLE_CONTENDERS_PATH = 'standing-demo.json';
+        if(typeof SEASON_SUMMARY_PATH === 'undefined') SEASON_SUMMARY_PATH = 'season-summary-demo.json';
+
+
         API.getStanding = function () {
-            return $http.get('/standing-demo.json');
+            return $http.get(DR27_DOMAIN + '/' + TITLE_CONTENDERS_PATH);
 
         };
 
-        API.getPunctuationList = function () {
-            return {
-                '1': 25,
-                '2': 18,
-                '3': 15,
-                '4': 12,
-                '5': 10,
-                '6': 8,
-                '7': 6,
-                '8': 4,
-                '9': 2,
-                '10': 1
-            }
+        API.getSeasonSummary = function () {
+            return $http.get(DR27_DOMAIN + '/' + SEASON_SUMMARY_PATH);
+
         };
 
         return API;

@@ -1,62 +1,74 @@
 [
   {
     "id": 1,
-    "name": "H",
-    "last_name": "Burnett",
-    "team": "British",
+    "driver": {
+      "first_name": "H",
+      "last_name": "Burnett"
+    },
+    "teams": "British",
     "points": 76,
     "total": 76,
-    "pos_str": "003000000000000000000000000001",
+    "positions_order": "003000000000000000000000000001",
     "total_str": "003000000000000000000000000001"
   },
   {
     "id": 2,
-    "name": "E",
-    "last_name": "Jans",
-    "team": "SK",
+    "driver": {
+      "first_name": "E",
+      "last_name": "Jans"
+    },
+    "teams": "SK",
     "points": 58,
     "total": 58,
-    "pos_str": "000003000000000000000001000000",
+    "positions_order": "000003000000000000000001000000",
     "total_str": "000003000000000000000001000000"
   },
   {
     "id": 3,
-    "name": "P",
-    "last_name": "Hogaboom",
-    "team": "FireCruiser",
+    "driver": {
+      "first_name": "P",
+      "last_name": "Hogaboom"
+    },
+    "teams": "FireCruiser",
     "points": 55,
     "total": 55,
-    "pos_str": "000001001001001000000000000000",
+    "positions_order": "000001001001001000000000000000",
     "total_str": "000001001001001000000000000000"
   },
   {
     "id": 4,
-    "name": "R",
-    "last_name": "Hale",
-    "team": "British",
+    "driver": {
+      "first_name": "R",
+      "last_name": "Hale"
+    },
+    "teams": "British",
     "points": 41,
     "total": 41,
-    "pos_str": "001000001000000000000000000000",
+    "positions_order": "001000001000000000000000000000",
     "total_str": "001000001000000000000000000000"
   },
   {
     "id": 5,
-    "name": "C",
-    "last_name": "Kubn",
-    "team": "FireCruiser",
+    "driver": {
+      "first_name": "C",
+      "last_name": "Kubn"
+    },
+    "teams": "FireCruiser",
     "points": 37,
     "total": 37,
-    "pos_str": "000000001001001000000000000000",
+    "positions_order": "000000001001001000000000000000",
     "total_str": "000000001001001000000000000000"
   },
   {
     "id": 6,
-    "name": "C",
-    "last_name": "Druphagel",
-    "team": "SK",
+    "driver": {
+      "first_name": "C",
+      "last_name": "Druphagel"
+    },
+    "teams": "SK",
     "points": 35,
     "total": 35,
-    "pos_str": "000000001001000001000000000000",
+    "positions_order": "000000001001000001000000000000",
     "total_str": "000000001001000001000000000000"
   }
 ]

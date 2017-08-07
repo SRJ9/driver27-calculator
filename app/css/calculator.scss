@@ -1,0 +1,16 @@
+$columns: 30;
+$green: rgb(92, 184, 92);
+
+@mixin table-td-list {
+  @for $i from 1 through $columns {
+      $opacity: (1 / $i);
+      .table-td-#{$i} { background: rgba($green, $opacity); }
+  }
+}
+
+@include table-td-list;
+
+.title_calculate {
+  font-variant: small-caps;
+  text-decoration: underline;
+}

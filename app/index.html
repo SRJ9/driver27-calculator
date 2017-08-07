@@ -10,7 +10,7 @@
 
     <!-- Bootstrap -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="calculator.css" rel="stylesheet">
+    <link href="css/calculator.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,10 +22,18 @@
 
 
 <div class="container" ng-controller="CalculatorCtrl" ng-cloak>
-    <h1 class="title_calculate"><span>Calculator <img src="car-steering-wheel32.png"></span><small>Driver27</small></h1>
+    <h1 class="title_calculate"><span>Calculator <img src="car-steering-wheel32.png"></span>
+        <small>Driver27</small>
+    </h1>
 
-    <a href="/#!/calculator" class="btn btn-info">Calculator</a>
-    <a href="/#!/table" class="btn btn-success">Table</a>
+    <div class="bg-info" ng-cloak>
+        <span class="competition-name"><strong>Competition</strong> {{ season_competition_name }}</span>
+        <span class="season-year"><strong>Year</strong> {{ season_year }}</span>
+        <span class="pending-races"><strong>Pending races</strong> {{ num_pending_races }}</span>
+    </div>
+
+    <a href="/#!/calculator" class="btn btn-info btn-xs">Calculator</a>
+    <a href="/#!/table" class="btn btn-success btn-xs">Table</a>
 
     <div ng-view></div>
 

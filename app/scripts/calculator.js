@@ -1,5 +1,4 @@
 var app = angular.module('CalculatorApp', ['ngRoute', 'apiFactory']);
-var range = _.range(1, 3);
 app.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
         $routeProvider
@@ -23,12 +22,28 @@ app.controller("CalculatorCtrl", function ($scope, $filter, API) {
     $scope.max_pos_str = null;
 
     API.getStanding().then(function (response) {
-        $scope.standing = response.data;
+        var standing = response.data;
+        angular.forEach(angular.element(standing), function (element, index) {
+            element.id = index;
+        });
+        $scope.standing = standing;
+
     }, function (err) {
         console.error(err);
     });
 
-    $scope.range = range;
+    API.getSeasonSummary().then(function(response){
+        var season_data = response.data;
+        $scope.season_competition_name = season_data.competition_name;
+        $scope.season_year = season_data.year;
+        $scope.num_pending_races = season_data.num_pending_races || 4;
+        $scope.range = _.range(1, $scope.num_pending_races+1);
+        $scope.pointSystem = season_data.punctuation_config.finish;
+        $scope.pending_races_summary = season_data.pending_races_summary;
+        console.log(season_data);
+    }, function(err){
+        console.log(err);
+    });
 
     $scope.finalStanding = function () {
         return $filter('orderBy')($scope.standing, ['-total', '-total_str']);
@@ -40,9 +55,14 @@ app.controller("CalculatorCtrl", function ($scope, $filter, API) {
 
     $scope.contenderCls = function (val) {
         return 'contender_' + val;
+
     };
 
-    $scope.pointSystem = API.getPunctuationList();
+    $scope.tableTdCls = function(val){
+        return 'table-td-'+val;
+    };
+
+
 
     $scope.calculateAllPoints = function () {
         angular.forEach($scope.standing, function (contender) {
@@ -55,7 +75,7 @@ app.controller("CalculatorCtrl", function ($scope, $filter, API) {
         var points = contender.points;
         var error_count = false;
 
-        contender.total_str = contender.pos_str;
+        contender.total_str = contender.positions_order;
 
         var total_split = contender.total_str.match(/.{3}/g);
         var total_split_length = total_split.length;
@@ -66,7 +86,13 @@ app.controller("CalculatorCtrl", function ($scope, $filter, API) {
             if (result_pos >= 1 && result_pos <= total_split_length) {
                 total_split[result_pos - 1] = parseInt(total_split[result_pos - 1]) + 1;
             }
-            var race_point = $scope.pointSystem[result.value];
+
+            var factor = 1;
+            var alter_punctuation = angular.element(result).data('alter-punctuation');
+            if(alter_punctuation === 'half') factor = 0.5;
+            else if(alter_punctuation === 'double') factor = 2;
+
+            var race_point = $scope.pointSystem[result.value - 1] * factor;
             if (race_point) {
                 points += race_point;
             }

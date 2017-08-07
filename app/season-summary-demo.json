@@ -1,0 +1,63 @@
+{
+  "competition_name": "World GP",
+  "year": 2017,
+  "pending_races_summary": [
+    {
+      "alter_punctuation": null,
+      "id": 140,
+      "name": "Japan"
+    },
+    {
+      "alter_punctuation": "double",
+      "id": 141,
+      "name": "Russia"
+    },
+    {
+      "alter_punctuation": null,
+      "id": 142,
+      "name": "United States"
+    },
+    {
+      "alter_punctuation": "half",
+      "id": 143,
+      "name": "Brazil"
+    },
+    {
+      "alter_punctuation": null,
+      "id": 144,
+      "name": "Mexico"
+    }
+  ],
+  "num_pending_races": 5,
+  "punctuation_config": {
+    "finish": [
+      25,
+      18,
+      15,
+      12,
+      10,
+      8,
+      6,
+      4,
+      2,
+      1
+    ],
+    "type": "full",
+    "label": "F1 (25p 1st)",
+    "fastest_lap": 0
+  },
+  "id": 14,
+  "pending_points": 125,
+  "competition_id": 8,
+  "has_champion": false,
+  "leader": {
+    "positions_order": "003000000000000000000000000001",
+    "points": 76,
+    "driver": {
+      "country": null,
+      "first_name": "H",
+      "last_name": "Burnett"
+    },
+    "teams": "British"
+  }
+}

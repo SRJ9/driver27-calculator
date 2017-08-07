@@ -24,7 +24,7 @@ total_str will be the champions.
 - [x] Create factory to connect driver27 API (use custom params)
 - [ ] Switch button to use standing.json or dr27 API response
 - [ ] Alert when position is repeated by two contenders in same race
-- [ ] Modularize the APP
+- [x] Modularize the APP
 - [ ] Punctuation system logic could be in the API side or use Flask
 - [ ] TypeScript
 - [ ] Convert to Angular2 APP (To evaluate)
